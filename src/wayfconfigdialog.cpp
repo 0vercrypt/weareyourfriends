@@ -26,9 +26,6 @@ ui(new Ui::WAYFConfigDialog)
 		m.exec();
 		isValid = false;
 	}
-	else
-	{
-	}
 }
 
 bool WAYFConfigDialog::isValid = true;
@@ -62,6 +59,7 @@ void WAYFConfigDialog::on_btnSave_clicked()
 {
 	QSettings settings(WAYFSettingsFile, QSettings::IniFormat);
 	QString selectedGroupKey = this->findChild<QComboBox*>("cbxServers")->itemData(this->findChild<QComboBox*>("cbxServers")->currentIndex()).toString();
+	settings.setValue(selectedGroupKey + "/ChannelGroupAdmin", this->findChild<QSpinBox*>("speChannelGroupAdmin")->value());
 	settings.setValue(selectedGroupKey + "/ChannelGroupFriends", this->findChild<QSpinBox*>("speChannelGroupFriends")->value());
 	settings.setValue(selectedGroupKey + "/ChannelGroupBlocked", this->findChild<QSpinBox*>("speChannelGroupBlocked")->value());
 	settings.setValue(selectedGroupKey + "/AutoKick", this->findChild<QCheckBox*>("chkAutoKick")->isChecked());
@@ -84,14 +82,18 @@ bool WAYFConfigDialog::LoadSettings()
 		this->findChild<QComboBox*>("cbxServers")->setEnabled(true);
 
 		QString selectedGroupKey = this->findChild<QComboBox*>("cbxServers")->itemData(this->findChild<QComboBox*>("cbxServers")->currentIndex()).toString();
+
+		this->findChild<QSpinBox*>("speChannelGroupAdmin")->setValue(settings.value(selectedGroupKey + "/ChannelGroupAdmin", 0).toInt());
 		this->findChild<QSpinBox*>("speChannelGroupFriends")->setValue(settings.value(selectedGroupKey + "/ChannelGroupFriends", 0).toInt());
 		this->findChild<QSpinBox*>("speChannelGroupBlocked")->setValue(settings.value(selectedGroupKey + "/ChannelGroupBlocked", 0).toInt());
 		this->findChild<QCheckBox*>("chkAutoKick")->setChecked(settings.value(selectedGroupKey + "/AutoKick", false).toBool());
+
+		this->findChild<QSpinBox*>("speChannelGroupAdmin")->setEnabled(true);
 		this->findChild<QSpinBox*>("speChannelGroupFriends")->setEnabled(true);
 		this->findChild<QSpinBox*>("speChannelGroupBlocked")->setEnabled(true);
 		this->findChild<QCheckBox*>("chkAutoKick")->setEnabled(true);
-
 		this->findChild<QPushButton*>("btnSave")->setEnabled(true);
+
 		settingsLoaded = true;
 		return settingsLoaded;
 	}
@@ -105,6 +107,7 @@ void WAYFConfigDialog::on_cbxServers_currentIndexChanged(int index)
 		printf("WAYF: on_cbxServers_currentIndexChanged\n");
 		QSettings settings(WAYFSettingsFile, QSettings::IniFormat);
 		QString selectedGroupKey = this->findChild<QComboBox*>("cbxServers")->itemData(index).toString();
+		this->findChild<QSpinBox*>("speChannelGroupAdmin")->setValue(settings.value(selectedGroupKey + "/ChannelGroupAdmin", 0).toInt());
 		this->findChild<QSpinBox*>("speChannelGroupFriends")->setValue(settings.value(selectedGroupKey + "/ChannelGroupFriends", 0).toInt());
 		this->findChild<QSpinBox*>("speChannelGroupBlocked")->setValue(settings.value(selectedGroupKey + "/ChannelGroupBlocked", 0).toInt());
 		this->findChild<QCheckBox*>("chkAutoKick")->setChecked(settings.value(selectedGroupKey + "/AutoKick", false).toBool());

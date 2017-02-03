@@ -44,6 +44,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_wayfconfigdialog.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="sqlite3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="wayfconfigdialog.ui" />
@@ -80,5 +83,10 @@
     <CustomBuild Include="..\include\wayfconfigdialog.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\sqlite3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -36,6 +36,8 @@ public:
     QCheckBox *chkAutoKick;
     QLabel *label_3;
     QComboBox *cbxServers;
+    QLabel *label_4;
+    QSpinBox *speChannelGroupAdmin;
 
     void setupUi(QDialog *WAYFConfigDialog)
     {
@@ -54,22 +56,22 @@ public:
         btnHelp->setGeometry(QRect(10, 240, 75, 23));
         label = new QLabel(WAYFConfigDialog);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(10, 40, 151, 16));
+        label->setGeometry(QRect(10, 80, 151, 16));
         label_2 = new QLabel(WAYFConfigDialog);
         label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(10, 70, 191, 16));
+        label_2->setGeometry(QRect(10, 110, 191, 16));
         speChannelGroupFriends = new QSpinBox(WAYFConfigDialog);
         speChannelGroupFriends->setObjectName(QStringLiteral("speChannelGroupFriends"));
         speChannelGroupFriends->setEnabled(false);
-        speChannelGroupFriends->setGeometry(QRect(270, 40, 42, 22));
+        speChannelGroupFriends->setGeometry(QRect(270, 80, 42, 22));
         speChannelGroupBlocked = new QSpinBox(WAYFConfigDialog);
         speChannelGroupBlocked->setObjectName(QStringLiteral("speChannelGroupBlocked"));
         speChannelGroupBlocked->setEnabled(false);
-        speChannelGroupBlocked->setGeometry(QRect(270, 70, 42, 22));
+        speChannelGroupBlocked->setGeometry(QRect(270, 110, 42, 22));
         chkAutoKick = new QCheckBox(WAYFConfigDialog);
         chkAutoKick->setObjectName(QStringLiteral("chkAutoKick"));
         chkAutoKick->setEnabled(false);
-        chkAutoKick->setGeometry(QRect(320, 70, 70, 17));
+        chkAutoKick->setGeometry(QRect(320, 110, 70, 17));
         label_3 = new QLabel(WAYFConfigDialog);
         label_3->setObjectName(QStringLiteral("label_3"));
         label_3->setGeometry(QRect(10, 10, 41, 16));
@@ -77,6 +79,16 @@ public:
         cbxServers->setObjectName(QStringLiteral("cbxServers"));
         cbxServers->setEnabled(false);
         cbxServers->setGeometry(QRect(60, 10, 321, 22));
+        label_4 = new QLabel(WAYFConfigDialog);
+        label_4->setObjectName(QStringLiteral("label_4"));
+        label_4->setGeometry(QRect(10, 40, 241, 31));
+        label_4->setWordWrap(true);
+        speChannelGroupAdmin = new QSpinBox(WAYFConfigDialog);
+        speChannelGroupAdmin->setObjectName(QStringLiteral("speChannelGroupAdmin"));
+        speChannelGroupAdmin->setEnabled(false);
+        speChannelGroupAdmin->setGeometry(QRect(270, 50, 42, 22));
+        QWidget::setTabOrder(cbxServers, speChannelGroupAdmin);
+        QWidget::setTabOrder(speChannelGroupAdmin, speChannelGroupFriends);
         QWidget::setTabOrder(speChannelGroupFriends, speChannelGroupBlocked);
         QWidget::setTabOrder(speChannelGroupBlocked, chkAutoKick);
         QWidget::setTabOrder(chkAutoKick, btnSave);
@@ -98,6 +110,7 @@ public:
         label_2->setText(QApplication::translate("WAYFConfigDialog", "Channel Gruppe f\303\274r blockierte Nutzer:", Q_NULLPTR));
         chkAutoKick->setText(QApplication::translate("WAYFConfigDialog", "Auto-Kick", Q_NULLPTR));
         label_3->setText(QApplication::translate("WAYFConfigDialog", "Server:", Q_NULLPTR));
+        label_4->setText(QApplication::translate("WAYFConfigDialog", "Welche Channel Gruppe musst du haben, damit das Plugin wirkt (i. d. R. Channel Admin)?", Q_NULLPTR));
     } // retranslateUi
 
 };
